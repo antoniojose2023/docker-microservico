@@ -1,0 +1,47 @@
+1 - cd /var/lib/docker/volumes
+mostra todos os volumes
+
+2- docker run --name webserver -dt -p 80:80 --mount type=volume src=app dst=/app/webdevops/php-apache:alpine-php?
+instalar o php e apache
+
+3- docker ps 
+lista todos os containers
+
+4- docker rm --force web-server 
+serve para remover o container
+
+5- docker swarm init
+criando o cluster
+
+6- docker swarm join --token seu token seu ip
+adiciona outras maquinas ao cluster
+
+7- docker node ls
+lista os nós pertencente ao cluster
+
+8- docker service create --name webserver --replicas 2 -dt -p 80:80 --mount type=volume, src=app, dst=/app/webdevops/php-apache:alpine-php7
+replica o servico em um cluster(várias máquinas)
+
+9- docker service ps web-server
+mostra onde foi aplicado os containers
+
+
+esse pacote servirá para replica o conteudos para os outros servidores e será instalado pacote para o servidor e outro para as maquinas clientes
+10- apt-get install nfs-ser
+pacote para o servidor
+
+11- apt-get install nfs-commom
+pacote para as maquinas clientes.
+
+12- nano /etc/exports
+/var/lib/docker/volumes/app/_data * (rw,subtree-check)
+acessando o arquivo exports e liberando acessando para todos na pasta compartilhada.
+
+13- exports -ar
+exportando a pasta
+
+14- showmount -e
+mostra a pasta compartilhada
+
+15- mount -o v3 seu ip:/var/lib/docker/volumes/app/_data/var/lib/docker/volumes/app/_data
+motando o conteudo em outros servidores
